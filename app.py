@@ -24,7 +24,7 @@ def send():
     }
     conv.append(body)
 
-    res = requests.post(user_url, body=body, headers={"Content-Type": "application/json"}) 
+    res = requests.post(user_url, json=body, headers={"Content-Type": "application/json"}) 
     print(res)
     return 200
 
