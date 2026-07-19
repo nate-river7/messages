@@ -4,7 +4,7 @@ import requests
 
 app = Flask(__name__)
 
-user_url = "192.168.1.8:5009/receive"
+user_url = "http://192.168.1.12:5009/receive"
 
 conv = []
 cur_user = None
@@ -20,15 +20,14 @@ def send():
     msg = request.form.get("message")
     body = {
         "name": cur_user,
-        "messge": msg,
+        "message": msg,
     }
     conv.append(body)
 
     res = requests.post(user_url, json=body, headers={"Content-Type": "application/json"}) 
     print(res)
-    return 200
 
-
+    return redirect(url_for('home'))
 
 
 @app.route("/receive", methods=["POST"])

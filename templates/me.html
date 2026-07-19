@@ -2,30 +2,95 @@
 <html>
 
 <head>
+    <title>Messenger</title>
 
-    <title> Messenger </title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            margin: 40px;
+        }
 
+        h1 {
+            text-align: center;
+        }
+
+        .chat-box {
+            width: 600px;
+            margin: auto;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 20px;
+            min-height: 400px;
+        }
+
+        .msg {
+            background: #e9f3ff;
+            padding: 10px 15px;
+            margin: 10px 0;
+            border-radius: 10px;
+        }
+
+        .name {
+            font-weight: bold;
+        }
+
+        form {
+            display: flex;
+            margin-top: 20px;
+            gap: 10px;
+        }
+
+        input[type="text"] {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #bbb;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            background: #007bff;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background: #0056b3;
+        }
+    </style>
 </head>
 
 <body>
-    <h1> Messages </h1>
 
-    
-    Messages:
-    {% for msg in data %}
-    <div class="msg">
-        <span class="name">
-            {{ msg.name }} : {{ msg.message }}
-        </span>
+    <div class="chat-box">
+
+        <h1>Messenger</h1>
+
+        {% for msg in data %}
+        <div class="msg">
+            <span class="name">{{ msg.name }}</span>: {{ msg.message }}
+        </div>
+        {% endfor %}
+
+        <form action="{{ url_for('send') }}" method="POST">
+            <input
+                type="text"
+                name="message"
+                placeholder="Type your message..."
+                autocomplete="off"
+                required
+            >
+
+            <button type="submit">Send</button>
+        </form>
+
     </div>
-    {% endfor %}
-    <form action="{{ url_for('send')}}" method="POST">
-        <input type = "text" name = 'message'>
-        
-        <button type="submit"> Send </button>
-    </form>
-    
-    <br> 
 
 </body>
 
